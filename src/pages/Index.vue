@@ -20,6 +20,22 @@
     <div class="container px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+          <!-- post  -->
+          <div class="post-preview" v-for="post in mdPosts">
+            <a href="post.html">
+              <h2 class="post-title">
+                {{ post.node.title }}
+              </h2>
+              <h3 class="post-subtitle">
+                {{ post.node.title }}
+              </h3>
+            </a>
+            <p class="post-meta">
+              Posted by
+              <a href="#!">Start Bootstrap</a>
+              on September 24, 2021
+            </p>
+          </div>
           <!-- Post preview-->
           <div class="post-preview">
             <a href="post.html">
@@ -100,11 +116,50 @@
   </Layout>
 </template>
 
+<page-query>
+query{
+  mdPosts:allMdPost{
+    edges{
+      node{
+        id
+        title
+        path
+        content
+      }
+    }
+  }
+  onlinePosts:allStrapiPost{
+    edges{
+      node{
+        title
+        cover{
+          url
+        }
+        content
+        created_at
+      }
+    }
+  }
+}
+</page-query>
+
 <script>
 export default {
-  name: 'IndexPage',
+  name: "IndexPage",
   metaInfo: {
     title: "Hello, world!",
+  },
+  computed: {
+    mdPosts() {
+      return this.$page.mdPosts.edges;
+    },
+    onlinePosts() {
+      return this.$page.onlinePosts.edges;
+    },
+  },
+  mounted() {
+    console.log("md-posts", this.mdPosts);
+    console.log("online-posts", this.onlinePosts);
   },
 };
 </script>
