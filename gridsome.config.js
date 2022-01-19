@@ -19,7 +19,7 @@ module.exports = {
       options: {
         apiURL: 'http://120.24.73.121:1337',
         queryLimit: 1000, // Defaults to 100
-        contentTypes: ['post'],
+        contentTypes: ['post','tag'],
         singleTypes: ['general'],
         // Possibility to login with a Strapi user,
         // when content types are not publicly available (optional).
