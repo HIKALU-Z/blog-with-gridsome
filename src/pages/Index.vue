@@ -30,14 +30,14 @@
             v-for="post in onlinePosts"
             :key="post.node.id"
           >
-            <a href="post.html">
+            <g-link :to="`post/${post.node.id}`">
               <h2 class="post-title">
                 {{ post.node.title }}
               </h2>
               <h3 class="post-subtitle">
                 {{ post.node.title }}
               </h3>
-            </a>
+            </g-link>
             <p class="post-meta">
               Posted by
               <a href="#!">{{ post.node.create_by.username }}</a>
@@ -120,6 +120,7 @@ query($page:Int){
     }
     edges{
       node{
+        id
         title
         cover{
           url

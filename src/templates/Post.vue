@@ -1,0 +1,73 @@
+<template>
+  <Layout>
+    <!-- Page Header-->
+    <header
+      class="masthead"
+      style="background-image: url('assets/img/post-bg.jpg')"
+    >
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="post-heading">
+              <h1>{{ $page.post.title }}</h1>
+              <h2 class="subheading">
+                {{ $page.post.title }}
+              </h2>
+              <span class="meta">
+                Posted by
+                <a href="#!">{{ $page.post.create_by.username }}</a>
+                {{ transformDate($page.post.created_at) }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Post Content-->
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div
+            class="col-md-10 col-lg-8 col-xl-7"
+            v-html="$page.post.content"
+          ></div>
+        </div>
+      </div>
+    </article>
+  </Layout>
+</template>
+
+<page-query>
+query($id:ID!){
+   post:strapiPost(id:$id){
+    id
+    title
+    cover{
+      url
+    }
+    tags{
+      id
+      name
+    }
+    content
+    created_at
+    create_by {
+      username
+    }
+  }
+}
+</page-query>
+
+<script>
+import * as dayjs from "dayjs";
+export default {
+  name: "PostPage",
+  methods: {
+    transformDate(date, formatRule) {
+      return dayjs(date).format("MMMM D, YYYY" || formatRule);
+    },
+  },
+};
+</script>
+
+<style></style>
