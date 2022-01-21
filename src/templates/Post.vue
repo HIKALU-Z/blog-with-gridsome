@@ -29,7 +29,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div
             class="col-md-10 col-lg-8 col-xl-7"
-            v-html="$page.post.content"
+            v-html="md2Html($page.post.content)"
           ></div>
         </div>
       </div>
@@ -60,11 +60,16 @@ query($id:ID!){
 
 <script>
 import * as dayjs from "dayjs";
+import MarkdownIt from "markdown-it";
+const md = new MarkdownIt();
 export default {
   name: "PostPage",
   methods: {
     transformDate(date, formatRule) {
       return dayjs(date).format("MMMM D, YYYY" || formatRule);
+    },
+    md2Html(markdown) {
+      return md.render(markdown);
     },
   },
 };

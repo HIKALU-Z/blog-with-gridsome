@@ -45,8 +45,10 @@
             </p>
             <p>
               <span v-for="tag in post.node.tags" :key="tag.id">
-                <a href="">{{ tag.name }}</a
-                >&nbsp;&nbsp;
+                <g-link :to="`tag/${tag.id}`">
+                  {{ tag.name }}
+                </g-link>
+                &nbsp;&nbsp;
               </span>
             </p>
             <!-- Divider-->
