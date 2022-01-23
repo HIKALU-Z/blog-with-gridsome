@@ -3,14 +3,16 @@
     <!-- Page Header-->
     <header
       class="masthead"
-      style="background-image: url('assets/img/contact-bg.jpg')"
+      :style="
+        `backgroundImage: url('${GRIDSOME_API_URL}/uploads/city_026099de2f.webp')`
+      "
     >
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="page-heading">
-              <h1>Contact Me</h1>
-              <span class="subheading">Have questions? I have answers.</span>
+              <h1>联系我</h1>
+              <span class="subheading">这里是AnA环节</span>
             </div>
           </div>
         </div>
@@ -22,8 +24,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <p>
-              Want to get in touch? Fill out the form below to send me a message
-              and I will get back to you as soon as possible!
+              有什么问题想问我的，就在下方填表发送吧
             </p>
             <div class="my-5">
               <!-- * * * * * * * * * * * * * * *-->
@@ -41,6 +42,7 @@
                     type="text"
                     placeholder="Enter your name..."
                     data-sb-validations="required"
+                    v-model="form.name"
                   />
                   <label for="name">Name</label>
                   <div
@@ -57,6 +59,7 @@
                     type="email"
                     placeholder="Enter your email..."
                     data-sb-validations="required,email"
+                    v-model="form.email"
                   />
                   <label for="email">Email address</label>
                   <div
@@ -76,6 +79,7 @@
                     type="tel"
                     placeholder="Enter your phone number..."
                     data-sb-validations="required"
+                    v-model="form.phone"
                   />
                   <label for="phone">Phone Number</label>
                   <div
@@ -92,6 +96,7 @@
                     placeholder="Enter your message here..."
                     style="height: 12rem"
                     data-sb-validations="required"
+                    v-model="form.message"
                   ></textarea>
                   <label for="message">Message</label>
                   <div
@@ -127,11 +132,12 @@
                 </div>
                 <!-- Submit Button-->
                 <button
-                  class="btn btn-primary text-uppercase disabled"
+                  class="btn btn-primary text-uppercase"
                   id="submitButton"
                   type="submit"
+                  @click.prevent="onSubmit"
                 >
-                  Send
+                  Send me
                 </button>
               </form>
             </div>
@@ -143,10 +149,42 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "AboutPage",
   metaInfo: {
     title: "Contact Me",
+  },
+  data() {
+    return {
+      form: {
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      },
+    };
+  },
+  methods: {
+    async onSubmit() {
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: "http://120.24.73.121/contacts",
+          data: this.form,
+        });
+        window.alert("发送成功");
+        this.form = {
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        };
+        console.log("data:", data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

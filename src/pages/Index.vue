@@ -4,9 +4,7 @@
     <header
       class="masthead"
       :style="{
-        backgroundImage: `url(http://120.24.73.121:1337${general &&
-          general.cover &&
-          general.cover.url})`,
+        backgroundImage: `url(${GRIDSOME_API_URL + general.cover.url})`,
       }"
     >
       <div class="container position-relative px-4 px-lg-5">
