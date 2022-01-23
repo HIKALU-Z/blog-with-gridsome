@@ -3,7 +3,7 @@
     <!-- Page Header-->
     <header
       class="masthead"
-      :style="`backgroundImage: url('${GRIDSOME_API_URL}/uploads/snow_df7b13c958.jpg')`"
+      :style="`backgroundImage: url('/uploads/snow_df7b13c958.jpg')`"
     >
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">

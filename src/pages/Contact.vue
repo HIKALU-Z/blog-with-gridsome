@@ -4,7 +4,7 @@
     <header
       class="masthead"
       :style="
-        `backgroundImage: url('${GRIDSOME_API_URL}/uploads/city_026099de2f.webp')`
+        `backgroundImage: url('/uploads/city_026099de2f.webp')`
       "
     >
       <div class="container position-relative px-4 px-lg-5">
